@@ -1,3 +1,7 @@
+# 2.0.2
+
+- feat: adds ordered object properties by @petrukha-ivan
+
 # 2.0.1
 
 - docs: adds related packages section by @kevinhermawan in https://github.com/kevinhermawan/swift-json-schema/pull/7

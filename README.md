@@ -4,6 +4,46 @@
 
 A convenient way to define JSON Schema in Swift.
 
+## Fork
+
+This fork provides a very specific encoding method to preserve the intended order of object properties. It uses `OrderedDictionary` to maintain key order, but also makes the encoded JSON look like this:
+
+```json
+{
+  "properties" : {
+    "__0__first" : {      
+      "type" : "string"
+    },
+    "__1__second" : {
+      "type" : "integer"
+    }
+  }
+}
+```
+
+This happens because the native `OrderedDictionary` encoding represents data as alternating key-value pairs in an array, which wasn’t what I needed for my use case:
+
+```json
+{
+  "properties" : [
+    "first",
+    {
+      "type" : "string"
+    },
+    "second",
+    {
+      "type" : "integer"
+    }
+  ]
+}
+```
+
+Using key prefixes and the lexicographic ordering option in `JSONEncoder` simplifies the process, since the prefixes can easily be removed from the string using the following code:
+
+```swift
+string.replacingOccurrences(of: "__[0-9]+__", with: "", options: .regularExpression)
+```
+
 ## Overview
 
 `JSONSchema` provides a Swift-native way to define JSON Schema definitions programmatically. This package leverages Swift's type system to create clear, concise, and type-safe JSON Schema definitions.

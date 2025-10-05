@@ -35,7 +35,7 @@ final class JSONStringTests: XCTestCase {
         let objectSchema = schema.objectSchema
         XCTAssertNotNil(objectSchema)
         
-        let properties = objectSchema?.properties
+        let properties = objectSchema?.properties?.ordered
         XCTAssertEqual(properties?.count, 2)
         
         let locationSchema = properties?["location"]

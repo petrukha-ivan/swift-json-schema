@@ -24,9 +24,9 @@ final class ObjectSchemaTests: XCTestCase {
         ])
         
         XCTAssertEqual(schema.type, .object)
-        XCTAssertEqual(schema.objectSchema?.properties?.count, 2)
-        XCTAssertNotNil(schema.objectSchema?.properties?["name"])
-        XCTAssertNotNil(schema.objectSchema?.properties?["age"])
+        XCTAssertEqual(schema.objectSchema?.properties?.ordered.count, 2)
+        XCTAssertNotNil(schema.objectSchema?.properties?.ordered["name"])
+        XCTAssertNotNil(schema.objectSchema?.properties?.ordered["age"])
     }
     
     func testObjectWithRequiredProperties() {
@@ -97,7 +97,7 @@ final class ObjectSchemaTests: XCTestCase {
         
         XCTAssertEqual(decodedSchema.type, .object)
         XCTAssertEqual(decodedSchema.description, "A test object")
-        XCTAssertEqual(decodedSchema.objectSchema?.properties?.count, 2)
+        XCTAssertEqual(decodedSchema.objectSchema?.properties?.ordered.count, 2)
         XCTAssertEqual(decodedSchema.objectSchema?.required, ["name"])
         XCTAssertEqual(decodedSchema.objectSchema?.minProperties, 1)
         XCTAssertEqual(decodedSchema.objectSchema?.maxProperties, 5)
